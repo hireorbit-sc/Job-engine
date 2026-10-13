@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ job.title }} - {{ job.company_name }}</title>
+    <link rel="stylesheet" href="https://jsdelivr.net">
+
+    <!-- 🌟 GOOGLE SEO SCHEMA (AUTOMATIC) 🌟 -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "JobPosting",
+      "title": "{{ job.title }}",
+      "description": "Apply for {{ job.title }} at {{ job.company_name }}.",
+      "datePosted": "{{ job.publication_date[:10] }}",
+      "hiringOrganization": {
+        "@type": "Organization",
+        "name": "{{ job.company_name }}"
+      },
+      "jobLocation": {
+        "@type": "Place",
+        "address": {
+          "@type": "PostalAddress",
+          "addressLocality": "{{ job.candidate_required_location if job.candidate_required_location else 'Remote' }}",
+          "addressCountry": "US"
+        }
+      }
+    }
+    </script>
+</head>
+<body class="container" style="padding: 20px;">
+    <p><a href="/">← Back to Live Jobs</a></p>
+    <article>
+        <h1>{{ job.title }}</h1>
+        <h2>🏢 Company: {{ job.company_name }}</h2>
+        <p><strong>📍 Location:</strong> {{ job.candidate_required_location if job.candidate_required_location else "Worldwide (Remote)" }}</p>
+        <hr>
+        <h4>Job details / Requirements:</h4>
+        <div>{{ job.description | safe }}</div>
+        <hr>
+        <a href="{{ job.url }}" target="_blank" role="button" style="background-color: #28a745;">Apply via Official Source</a>
+    </article>
+</body>
+</html>
