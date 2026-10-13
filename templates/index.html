@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Live Job Search Engine</title>
+    <link rel="stylesheet" href="https://jsdelivr.net">
+</head>
+<body class="container">
+    <header style="padding: 20px 0; text-align: center;">
+        <h1>🌐 Free Live Job Search Engine</h1>
+        <p>Real-time technical & remote jobs directly from the internet.</p>
+    </header>
+    <main>
+        <h2>Latest Live Openings</h2>
+        {% if not jobs %}
+            <p>Fetching latest jobs from the internet...</p>
+        {% endif %}
+        {% for job in jobs %}
+        <article style="padding: 20px; margin-bottom: 20px;">
+            <h3><a href="/job/{{ job.id }}">{{ job.title }}</a></h3>
+            <p><strong>Company:</strong> {{ job.company_name }}</p>
+            <p><strong>Location:</strong> 📍 {{ job.candidate_required_location if job.candidate_required_location else "Worldwide" }}</p>
+            <a href="/job/{{ job.id }}" role="button">View Details & Apply</a>
+        </article>
+        {% endfor %}
+    </main>
+</body>
+</html>
